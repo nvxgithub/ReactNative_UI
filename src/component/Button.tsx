@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View,TouchableOpacity, Text, StyleSheet} from 'react-native';
 
+
+
+
 const ButtonComponent=()=>{
+
+    const [count,setCount]=useState(0);
+
+    const OnPress=()=>{
+        setCount(prevcount=>prevcount+1);
+        console.log("Count:",count);
+    }
+
     return(
 <View>
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={OnPress}>
         <Text>Login</Text>
     </TouchableOpacity>
 </View>
@@ -21,7 +32,7 @@ const styles = StyleSheet.create({
       borderRadius:5,
       elevation: 3,
       padding:10,
-      backgroundColor: 'blue',
+      backgroundColor: '#00C8FF',
     },
   });
 
