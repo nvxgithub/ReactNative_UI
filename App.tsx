@@ -7,8 +7,8 @@ import InstagramHome from './src/screens/InstagramHome';
 
 const App=()=>{
   return(
-    // <InstagramHome/>
-    <Login/>
+    <InstagramHome/>
+    // <Login/>
   )
   
 };

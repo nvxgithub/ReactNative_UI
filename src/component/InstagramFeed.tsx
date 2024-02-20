@@ -1,3 +1,5 @@
+import { Dimensions, FlatList, Image, StyleSheet, Text, View } from "react-native";
+
 const feeds = [
     {
       id: '1', feedImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg_4qTecYyAS3Le7wSQWgrJoMCHMUVBhSn1B1JxQCBJ7NTeQKMF9IlopklR-24QLFRN00&usqp=CAU'
@@ -30,3 +32,126 @@ const feeds = [
 
     // Add more feeds here
   ];
+
+  type ItemProps = {title: string,imageUrl:string,feedImage:string,likeCount:string};
+
+
+const FeedItem=({title,imageUrl,feedImage,likeCount}:ItemProps)=>{
+    return( <View style={styles.mainContainer}>
+
+        {/* profileHeader */}
+
+        <View style={styles.profileContainer}>
+            <Image
+            style={styles.storypic}
+            source={{uri:imageUrl}}
+            />
+            <Text style={styles.text}>{title}</Text>
+        </View>
+
+        {/* feedImage */}
+        
+        <View>
+        <Image
+            style={styles.feedPic}
+            source={{uri:feedImage}}
+            />
+        </View>
+
+        {/* buttons */}
+
+        <View style={styles.icons}>
+        <Image
+            style={styles.iconPic}
+            source={require('../assets/images/heart.png')}
+            />
+        <Image
+            style={styles.iconPic}
+            source={require('../assets/images/chat.png')}
+            />
+        <Image
+            style={styles.iconPic}
+            source={require('../assets/images/send.png')}
+            />
+        </View>
+
+        {/* likenumber */}
+        <View style={styles.likecount}>
+        <Text>{`likes ${likeCount}`}</Text>
+        </View>
+        
+
+    </View>)
+   
+  }
+
+  const InstagramFeed=()=>{
+    return( 
+    <View style={styles.container}>
+        <FlatList
+        showsVerticalScrollIndicator={false}
+        data={feeds}
+        renderItem={({item}) => <FeedItem title={item.title} imageUrl={item.imageUrl} feedImage={item.feedImage} likeCount={item.likeCount}/>}
+        keyExtractor={item => item.id}
+      />
+    </View>
+    )
+   
+  }
+
+  const screenWidth = Dimensions.get('window').width;
+
+  const styles = StyleSheet.create({
+    storypic: {
+        width: 40,
+        height: 40,
+        margin:10,
+        borderRadius: 150 / 2,
+        overflow: "hidden",
+        borderWidth: 3,
+        borderColor: "#ff0066"
+
+      },
+      feedPic:{
+        width:screenWidth,
+        height:screenWidth,
+
+      },
+
+      iconPic:{
+        width:25,
+        height:25,
+        marginHorizontal:10,
+        marginVertical:5,
+      },
+
+      icons:{
+       flexDirection:'row'
+      },
+      likecount:{
+        marginHorizontal:5,
+      },
+
+      text:{
+        textAlign:'left',
+        marginVertical:20,
+      },
+      container:{
+        overflow: "hidden",
+        flexDirection:"column",
+      },
+      profileContainer:{
+        flexDirection:"row",
+
+      },
+      mainContainer:{
+        marginHorizontal:5,
+        marginVertical:10,
+      }
+    }
+  )
+
+
+
+  export default InstagramFeed;
+  
